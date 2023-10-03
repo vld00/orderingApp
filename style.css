@@ -1,0 +1,100 @@
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h4 {
+            text-align: center;
+            color: #333;
+        }
+
+        .menu-item {
+            display: border-box;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            position: relative;
+        }
+        .menu-item:hover {
+            background-color: #f2f2f2;
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            transform: scale(1.3);
+        }
+
+        .order-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .order-button {
+            background-color: #ccc;
+            vertical-align: middle;
+            color: #333;
+            border: none;
+            margin-left: 15px;
+            border-radius: 5px;
+            padding: 10px 10px;
+            cursor: pointer;
+        }
+        .order-button.disabled {
+            display: none;
+        }
+
+        .translation {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+    
+        .menu-item:hover .translation {
+            display: border-box;
+        }
+
+        .price {
+            display: flex;
+            cursor: pointer;
+            position: relative;
+        }
+
+        span {
+            padding: 10px 10px;
+            font-weight:bolder;
+            cursor: pointer;
+            position: relative;
+            color: rgb(150, 0, 0);
+        }
+
+

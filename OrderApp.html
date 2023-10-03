@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyrights" content="all rights reserved">
+    <meta name="master" content="v15.html">
+    <meta name="version" content="v1.1">
+    <meta name="author" content="Leo Yigit Ekiz">
+    <meta name="description" content="A instant messaging system for caffe, bar and restaurants">
+    <meta name="keywords" content="restaurant, caffe, bar, whatsapp, messaging, systems">    
+    <meta name="creator" content="Leo Yigit Ekiz">
+
+    <title>Capital Café Lounge Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+
+
+</head>
+
+
+<body>
+    <div class="container">
+        <h1>Capital Café Lounge</h1>
+
+        <div class="menu-section">
+
+            <h2>Hot Drinks</h2>
+
+            <div class="menu-item" onclick="addToOrder('Espresso Coffee', this)">
+                Espresso Coffee
+                <span>2,00 KM</span>
+
+                <button class="order-button" data-item="Espresso Coffee">Add</button>
+
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Short Macchiato', this)">
+                Short Macchiato
+                <span>2,50 KM</span>
+
+                <button class="order-button" data-item="Short Macchiato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Long Macchiato', this)">
+                Long Macchiato
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Long Macchiato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cappuccino', this)">
+                Cappuccino
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Cappuccino">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Caffe Decafeinato', this)">
+                Caffe Decafeinato
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Caffe Decafeinato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Caffe Americano', this)">
+                Caffe Americano
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Caffe Americano">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Classic', this)">
+                Nescafe Classic
+                <span>3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Classic">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Chocolate', this)">
+                Nescafe Chocolate
+                <span>3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Chocolate">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Vanilla', this)">
+                Nescafe Vanilla
+                <span>3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Vanilla">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Raspberry', this)">
+                Nescafe Raspberry
+                <span>3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Raspberry">Add</button>
+                
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Coconut', this)">
+                Nescafe Coconut
+                <span>3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Coconut">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Tea', this)">
+                Tea
+                <span>2,00 KM</span>
+
+                <button class="order-button" data-item="Tea">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Black Tea', this)">
+                Black Tea
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Black Tea">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Green Tea', this)">
+                Green Tea
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Green Tea">Add</button>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+        <div class="menu-section">
+            <h2>Cold Drinks </h2>
+
+            <div class="menu-item" onclick="addToOrder('Coca Cola 0,25l', this)">
+                Coca Cola 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Coca Cola 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Fanta 0,25l', this)">
+                Fanta 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Fanta 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Sprite 0,25l', this)">
+                Sprite 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Sprite 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cocta 0,25l', this)">
+                Cocta 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Cocta 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Sensation 0,25l', this)">
+                Sensation 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Sensation 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Bitter Lemon 0,25l', this)">
+                Schweppes Bitter Lemon 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Schweppes Bitter Lemon 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Tangerine 0,25l', this)">
+                Schweppes Tangerine 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="'Schweppes Tangerine 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Tonic 0,25l', this)">
+                Schweppes Tonic 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="'Schweppes Tonic 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Orangina 0,33l', this)">
+                Orangina 0,33l
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Orangina 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Somersby %0 0,33l', this)">
+                Somersby %0 0,33l
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="'Somersby %0 0,33l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+        <div class="menu-section">
+            
+            <h2>Juices</h2>
+
+            <div class="menu-item" onclick="addToOrder('Cappy 0,25l', this)">
+                Cappy 0,25l
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Cappy 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Kuća Prirode Natural Juices 0,25l', this)">
+                Kuća Prirode Natural Juices 0,25l
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Kuća Prirode Natural Juices 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cedevita Instant Drink 0,25l', this)">
+                Cedevita Instant Drink 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Cedevita Instant Drink 0,25l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Energy Drinks</h2>
+
+            <div class="menu-item" onclick="addToOrder('Red Bull 0,25l', this)">
+                Red Bull 0,25l
+                <span>5,00 KM</span>
+
+                <button class="order-button" data-item="Red Bull 0,25l">Add</button>
+            </div>
+            <div class="menu-item" onclick="addToOrder('Burn 0,25l', this)">
+                Burn 0,25l
+                <span>4,00 KM</span>
+
+                <button class="order-button" data-item="Burn 0,25l">Add</button>
+            </div>
+            <div class="menu-item" onclick="addToOrder('Richard 0,25l', this)">
+                Richard 0,25l
+                <span>3,00 KM</span>
+
+                <button class="order-button" data-item="Richard 0,25l">Add</button>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="menu-section">
+
+            <h2>Water</h2>
+
+            <div class="menu-item" onclick="addToOrder('Non-Carbonated Water 0,33l', this)">
+                Non-Carbonated Water 0,33l
+                <span>2,50 KM</span>
+ 
+                <button class="order-button" data-item="Non-Carbonated Water 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Carbonated Water 0,33l', this)">
+                Carbonated Water 0,33l
+                <span>2,50 KM</span>
+
+                <button class="order-button" data-item="Carbonated Water 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Non-Carbonated Water 0,75l', this)">
+                Non-Carbonated Water 0,75l
+                <span>5,00 KM</span>
+ 
+                <button class="order-button" data-item="Non-Carbonated Water 0,75l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Carbonated Water 0,75l', this)">
+                Carbonated Water 0,75l
+                <span>6,00 KM</span>
+
+                <button class="order-button" data-item="Carbonated Water 0,75l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Desserts</h2>
+
+            <div class="menu-item" onclick="addToOrder('Cheesecake Raspberry', this)">
+                Cheesecake Raspberry 
+                <span>5,00 KM</span>
+
+                <button class="order-button" data-item="Cheesecake Raspberry">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Pistachio Cake', this)">
+                Pistachio Cake
+                <span>5,00 KM</span>
+
+                <button class="order-button" data-item="Pistachio Cake">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Chocolate Mousse Cake', this)">
+                Chocolate Mousse Cake 
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Chocolate Mousse Cake">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Baklava with Walnuts', this)">
+                Baklava with Walnuts
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Baklava with Walnuts">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Baklava with Pistachios', this)">
+                Baklava with Pistachios
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Baklava with Pistachios">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Tufahija', this)">
+                Tufahija
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Tufahija">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Choco Pear', this)">
+                Choco Pear
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Choco Pear">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Apple pie with Vanilla topping', this)">
+                Apple pie with Vanilla topping 
+                <span>5,00 KM</span>
+                <button class="order-button" data-item="Apple pie with Vanilla topping">Add</button>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Hookah</h2>
+
+            <div class="menu-item" onclick="addToOrder('Hookah', this)">
+                Hookah 
+                <span>8,00 KM</span>
+
+                <button class="order-button" data-item="Hookah">Add</button>
+            </div>
+
+        
+        </div>
+
+
+    </div>
+    <div>
+        <h4>Ordered Items</h4>
+    </div>
+    
+    <div class="container">
+        <div class="order-buttons">
+            <!-- Order summary buttons will be displayed here -->
+        </div>
+    </div>
+    <div>
+        <br>
+
+
+    </div>
+    <button class="whatsapp-button" onclick="sendOrder()">Send Order</button>
+
+    
+</body>
+</html>
