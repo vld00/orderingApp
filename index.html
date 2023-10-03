@@ -14,18 +14,149 @@
     <meta name="creator" content="Leo Yigit Ekiz">
 
     <title>Capital Café Lounge Menu</title>
+    
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+
+        .container {
+            padding-top: 100px;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h4 {
+            text-align: center;
+            color: #ededed;
+        }
+
+        .menu-item {
+            display: border-box;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            position: relative;
+        }
+        .menu-item:hover {
+            background-color: #f2f2f2;
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            transform: scale(1.3);
+        }
+
+        .order-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .order-button {
+            background-color: #ccc;
+            vertical-align: middle;
+            color: #333;
+            border: none;
+            margin-left: 15px;
+            border-radius: 5px;
+            padding: 10px 10px;
+            cursor: pointer;
+        }
+        .order-button.disabled {
+            display: none;
+        }
+
+        .translation {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+    
+        .menu-item:hover .translation {
+            display: border-box;
+        }
+
+        .price {
+            display: flex;
+            cursor: pointer;
+            position: relative;
+        }
+
+        span {
+            padding: 10px 10px;
+            font-weight:bolder;
+            cursor: pointer;
+            position: relative;
+            color: rgb(150, 0, 0);
+        }
+
+        .navbar {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            position: fixed;
+            top: 0px;
+            left: 0;
+            right: 0;
+            background-color: #000000; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar img {
+            max-width: 100%;
+            height: 250px;
+            max-height: 50px; 
+        }
+
+
+    </style>
 
 
 </head>
 
 
 <body>
-    <div class="container">
-        <h1>Capital Café Lounge</h1>
 
+
+    </div>
+    <div class="container">
+        <h1></h1>
+        <div class="navbar">
+            <img src="https://cbr.ba/wp-content/uploads/2023/10/LOGO_GOLD-e1696324834714.png" alt="Logo">
+        </div>
         <div class="menu-section">
 
             <h2>Hot Drinks</h2>
@@ -412,7 +543,7 @@
     <div class="container">
         <div class="order-buttons">
 
-        
+
         </div>
     </div>
     <div>
@@ -422,6 +553,90 @@
     </div>
     <button class="whatsapp-button" onclick="sendOrder()">Send Order</button>
 
+
+
+
+    <script>
+                let tableNumber = 'Table 1';
+        let itemCounts = {};
+
+        function addToOrder(item, element) {
+            if (!itemCounts[item]) {
+                itemCounts[item] = 0;
+            }
+            itemCounts[item]++;
+            updateButton(element, item);
+            updateOrderButtons();
+        }
+
+        function updateButton(element, item) {
+            const button = element.querySelector('.order-button');
+            button.textContent = `${itemCounts[item]}x Add`;
+            button.style.backgroundColor = '#25d366';
+            button.style.color = '#fff';
+        }
+
+        function updateOrderButtons() {
+            const orderButtons = document.querySelector('.order-buttons');
+            orderButtons.innerHTML = '';
+
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                    const count = itemCounts[item];
+                    const button = document.createElement('button');
+                    button.textContent = `${item} x${count}`;
+                    button.className = 'order-button';
+                    button.dataset.item = item;
+                    button.onclick = () => removeFromOrder(item);
+                    orderButtons.appendChild(button);
+                }
+            }
+
+            const clearButton = document.createElement('button');
+            clearButton.textContent = 'Clear';
+            clearButton.className = 'order-button';
+            clearButton.onclick = clearOrder;
+            orderButtons.appendChild(clearButton);
+        }
+
+        function removeFromOrder(item) {
+            itemCounts[item]--;
+            if (itemCounts[item] === 0) {
+                delete itemCounts[item];
+            }
+            updateOrderButtons();
+        }
+
+        function clearOrder() {
+            itemCounts = {};
+            updateOrderButtons();
+        }
+
+        function sendOrder() {
+            const orderItems = [];
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                    orderItems.push(`${itemCounts[item]} ${item}`);
+                }
+            }
+
+            if (orderItems.length === 0) {
+                alert('Your order is empty. :)');
+                return;
+            }
+
+            const orderSummary = orderItems.join(', ');
+            const whatsappMessage = `*${tableNumber} - Total Items: ${orderItems.length} - Order: ${orderSummary}*`;
+
+            // Add the formatted order to the WhatsApp URL
+            const whatsappLink = 'https://wa.me/387603166607?text=' + encodeURIComponent(whatsappMessage);
+            window.open(whatsappLink, '_blank');
+        }
+
+
+
+
+    </script>
     
 </body>
 </html>
