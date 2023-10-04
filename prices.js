@@ -1,0 +1,51 @@
+
+const itemPrices = {
+        
+    
+    'Espresso Coffee': 2.00,
+    'Short Macchiato': 2.50,
+    'Long Macchiato': 3.00,
+    'Cappuccino': 3.00,
+    'Caffe Decafeinato': 4.00,
+    'Caffe Americano': 4.00,
+    'Nescafe Classic': 3.50,
+    'Nescafe Chocolate': 3.50,
+    'Nescafe Vanilla': 3.50,
+    'Nescafe Raspberry': 3.50,
+    'Nescafe Coconut': 3.50,
+    'Tea': 2.00,
+    'Black Tea': 3.00,
+    'Green Tea': 3.00,
+    'Coca Cola 0,25l': 3.00,
+    'Fanta 0,25l': 3.00,
+    'Sprite 0,25l': 3.00,
+    'Cocta 0,25l': 3.00,
+    'Sensation 0,25l': 3.00,
+    'Schweppes Bitter Lemon 0,25l': 3.00,
+    'Schweppes Tangerine 0,25l': 3.00,
+    'Schweppes Tonic 0,25l': 3.00,
+    'Orangina 0,33l': 4.00,
+    'Somersby %0 0,33l': 4.00,
+    'Cappy 0,25l': 4.00,
+    'Kuća Prirode Natural Juices 0,25l': 4.00,
+    'Cedevita Instant Drink 0,25l': 3.00,
+    'Red Bull 0,25l': 5.00,
+    'Burn 0,25l': 4.00,
+    'Richard 0,25l': 3.00,
+    'Non-Carbonated Water 0,33l': 2.50,
+    'Carbonated Water 0,33l': 2.50,
+    'Non-Carbonated Water 0,75l': 5.00,
+    'Carbonated Water 0,75l': 6.00,
+    'Cheesecake Raspberry': 5.00,
+    'Pistachio Cake': 5.00,
+    'Chocolate Mousse Cake': 5.00,
+    'Baklava with Walnuts': 5.00,
+    'Baklava with Pistachios': 5.00,
+    'Tufahija': 5.00,
+    'Choco Pear': 5.00,
+    'Apple pie with Vanilla topping': 5.00,
+    'Hookah': 8.00
+
+};
+
+export { itemPrices };
