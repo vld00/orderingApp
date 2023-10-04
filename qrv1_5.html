@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyrights" content="all rights reserved">
+    <meta name="master" content="v15.html">
+    <meta name="version" content="v1.1">
+    <meta name="author" content="Leo Yigit Ekiz">
+    <meta name="description" content="A instant messaging system for caffe, bar and restaurants">
+    <meta name="keywords" content="restaurant, caffe, bar, whatsapp, messaging, systems">    
+    <meta name="creator" content="Leo Yigit Ekiz">
+
+    <title>Capital Caffé Lounge Menu</title>
+
+
+    <script>    
+        let tableNumber = '001';
+        let itemCounts = {};
+    
+        const itemPrices = {
+        
+    
+        'Espresso Coffee': 2.00,
+        'Short Macchiato': 2.50,
+        'Long Macchiato': 3.00,
+        'Cappuccino': 3.00,
+        'Caffe Decafeinato': 4.00,
+        'Caffe Americano': 4.00,
+        'Nescafe Classic': 3.50,
+        'Nescafe Chocolate': 3.50,
+        'Nescafe Vanilla': 3.50,
+        'Nescafe Raspberry': 3.50,
+        'Nescafe Coconut': 3.50,
+        'Tea': 2.00,
+        'Black Tea': 3.00,
+        'Green Tea': 3.00,
+        'Coca Cola 0,25l': 3.00,
+        'Fanta 0,25l': 3.00,
+        'Sprite 0,25l': 3.00,
+        'Cocta 0,25l': 3.00,
+        'Sensation 0,25l': 3.00,
+        'Schweppes Bitter Lemon 0,25l': 3.00,
+        'Schweppes Tangerine 0,25l': 3.00,
+        'Schweppes Tonic 0,25l': 3.00,
+        'Orangina 0,33l': 4.00,
+        'Somersby %0 0,33l': 4.00,
+        'Cappy 0,25l': 4.00,
+        'Kuća Prirode Juices 0,25l': 4.00,
+        'Cedevita Instant Drink 0,25l': 3.00,
+        'Red Bull 0,25l': 5.00,
+        'Burn 0,25l': 4.00,
+        'Richard 0,25l': 3.00,
+        'Non-Carbonated Water 0,33l': 2.50,
+        'Carbonated Water 0,33l': 2.50,
+        'Non-Carbonated Water 0,75l': 5.00,
+        'Carbonated Water 0,75l': 6.00,
+        'Cheesecake Raspberry': 5.00,
+        'Pistachio Cake': 5.00,
+        'Chocolate Mousse Cake': 5.00,
+        'Baklava with Walnuts': 5.00,
+        'Baklava with Pistachios': 5.00,
+        'Tufahija': 5.00,
+        'Choco Pear': 5.00,
+        'Apple pie with Vanilla topping': 5.00,
+        'Hookah': 8.00
+    
+    };
+
+    
+    
+        function addToOrder(item, element) {
+            if (!itemCounts[item]) {
+                itemCounts[item] = 0;
+            }
+            itemCounts[item]++;
+            updateButton(element, item);
+            updateOrderButtons();
+        }
+    
+        function updateButton(element, item) {
+            const button = element.querySelector('.order-button');
+            button.textContent = `${itemCounts[item]}x Add`;
+            button.style.backgroundColor = '#25d366';
+            button.style.color = '#000';
+        }
+    
+        function updateOrderButtons() {
+            const orderButtons = document.querySelector('.order-buttons');
+            orderButtons.innerHTML = '';
+    
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                    const count = itemCounts[item];
+                    const button = document.createElement('button');
+                    button.textContent = `${item} x${count}`;
+                    button.className = 'order-button';
+                    button.dataset.item = item;
+                    button.onclick = () => removeFromOrder(item);
+                    orderButtons.appendChild(button);
+                }
+            }
+    
+            const clearButton = document.createElement('button');
+            clearButton.textContent = 'CLEAR';
+            clearButton.className = 'order-button';
+            clearButton.onclick = clearOrder;
+            orderButtons.appendChild(clearButton);
+            clearButton.style.backgroundColor = 'red';
+            clearButton.style.color = '#fff';
+        }
+    
+        function removeFromOrder(item) {
+            itemCounts[item]--;
+            if (itemCounts[item] === 0) {
+                delete itemCounts[item];
+            }
+            updateOrderButtons();
+        }
+    
+        function clearOrder() {
+            itemCounts = {};
+            updateOrderButtons();
+        }
+    
+        function calculateTotalPrice() {
+            let total = 0;
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                    total += itemPrices[item] * itemCounts[item];
+                }
+            }
+            return total.toFixed(2); 
+        }
+    
+        function sendOrder() {
+            const orderItems = [];
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                    orderItems.push(`${itemCounts[item]} ${item}`);
+                }
+            }
+    
+            if (orderItems.length === 0) {
+                alert('Your order is empty. :)');
+                return;
+            }
+
+        function calculateTotalSelectedItems() {
+            let totalSelected = 0;
+            for (const item in itemCounts) {
+                if (itemCounts.hasOwnProperty(item)) {
+                totalSelected += itemCounts[item];
+        }
+            }
+    return totalSelected;
+            }
+
+    
+            const total = calculateTotalPrice();
+            const orderSummary = orderItems.join(',\n');
+            const tableInfo = ` ╠══ *Table #: ${tableNumber} ══╣* `;
+            const totalItemsInfo = ` ||   Total Items:  ${orderItems.length}     || `;
+            const orderTime = new Date().toLocaleTimeString(); 
+    
+            const whatsappMessage = `${tableInfo}\n${totalItemsInfo}\n\n${orderSummary}\n\n >> TOTAL ${total} KM <<\nOrdered @ ${orderTime}\n-\n`;
+    
+            const whatsappLink = 'https://wa.me/387603166607?text=' + encodeURIComponent(whatsappMessage);
+            window.open(whatsappLink, '_blank');
+
+            
+        }
+    </script>
+
+
+    
+    
+
+    <style>
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(https://images.unsplash.com/photo-1551610290-e153ec567dd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=963&q=80);
+            border-image-repeat: none;
+            background-color: #1b1b1b;
+        }
+
+        
+
+        .container {
+            padding-top: 120px;
+            padding-bottom: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 10px ;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .navbar {
+            opacity: 100%;
+            background-image: url(https://images.unsplash.com/photo-1551610290-e153ec567dd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=963&q=80);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            position: fixed;
+            top: 0px;
+            left: 0;
+            right: 0;
+            background-color: #1b1b1b; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar img {
+            max-width: 100%;
+            height: 250px;
+            max-height: 50px; 
+        }
+
+
+        .button .order-button {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+
+        }
+
+        .bottom-container {
+            padding: 20px 20px;
+            max-width: 460px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 0px 0px 10px 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h4 {
+            text-align: center;
+            color: #000;
+        }
+
+        h5 {
+            font-weight: bolder;
+            color: #2e2b24;
+            text-align: center;
+        }
+
+        h2 {
+            padding-left: 20px;
+            transition: all .4s ease-in-out;
+
+        }
+
+        h2:hover {
+            color: #960000;
+            padding-left: 20px;
+        }
+
+
+        /* ############ */
+
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            padding: 10px 20px; 
+            /* border-bottom: 1px solid #ccc; */
+            cursor: pointer;
+            position: relative;
+}
+
+        .menu-item span.price {
+            text-align: right;
+            flex: 1; 
+        }
+
+        .menu-item button.order-button {
+            margin-left: auto;
+        }
+
+
+
+
+ 
+        .menu-item:hover {
+            transition: all .1s ease-in-out;
+            background-color: #d3c5a7;
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            color: #fff;
+            min-height: 60px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            transform: scale(1.3);
+        }
+
+        .ordered-items {
+            padding: 10px 20px;
+            max-width: 460px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px 10px 0px 0px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 460px;
+            background-color: #fff;
+            display: block;
+
+        }
+
+        .order-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .order-button {
+            text-transform: capitalize;
+            background-color: #ccc;
+            vertical-align: middle;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 10px;
+            cursor: pointer;
+            align-self: flex-end; /* Align the button to the bottom */
+        }
+        .order-button.disabled {
+            display: none;
+        }
+
+        .translation {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+    
+        .menu-item:hover .translation {
+            display: border-box;
+        }
+
+        .price {
+            display: flex;
+            cursor: pointer;
+            position: relative;
+        }
+
+        span.price {
+            padding: 10px 10px;
+            font-weight:bolder;
+            cursor: pointer;
+            position: relative;
+            color: #960000;
+        }
+
+
+
+        /* Mobile */
+@media (max-width: 767px) {
+    body {
+        background-image: none; /* Remove background image for mobile */
+        background-color: #1b1b1b;
+    }
+
+    .container, .bottom-container {
+        max-width: 100%; /* Make containers full-width for mobile */
+    }
+
+    .navbar {
+        padding-top: 10px; /* Reduce padding for mobile */
+    }
+
+    .navbar img {
+        height: auto; /* Allow the logo to adjust its height */
+        max-height: 40px; /* Limit the maximum logo height */
+    }
+
+    h1, h4, h5 {
+        text-align: center;
+    }
+
+    /* Adjust other styles as needed for mobile devices */
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Define styles specific to tablets */
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    /* Define styles specific to desktops */
+}
+
+
+
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+    </div>
+    <div class="container">
+        <h1></h1>
+        <div class="navbar">
+            <img src="https://cbr.ba/wp-content/uploads/2023/10/LOGO_GOLD-e1696324834714.png" alt="Logo">
+        </div>
+        <div class="menu-section">
+
+            <h2>Hot Drinks</h2>
+
+            <div class="menu-item" onclick="addToOrder('Espresso Coffee', this)">
+                Espresso Coffee
+                <span class="price">2,00 KM</span>
+
+                <button class="order-button" data-item="Espresso Coffee">Add</button>
+
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Short Macchiato', this)">
+                Short Macchiato
+                <span class="price">2,50 KM</span>
+
+                <button class="order-button" data-item="Short Macchiato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Long Macchiato', this)">
+                Long Macchiato
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Long Macchiato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cappuccino', this)">
+                Cappuccino
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Cappuccino">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Caffe Decafeinato', this)">
+                Caffe Decafeinato
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="Caffe Decafeinato">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Caffe Americano', this)">
+                Caffe Americano
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="Caffe Americano">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Classic', this)">
+                Nescafe Classic
+                <span class="price">3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Classic">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Chocolate', this)">
+                Nescafe Chocolate
+                <span class="price">3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Chocolate">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Vanilla', this)">
+                Nescafe Vanilla
+                <span class="price">3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Vanilla">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Raspberry', this)">
+                Nescafe Raspberry
+                <span class="price">3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Raspberry">Add</button>
+                
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Nescafe Coconut', this)">
+                Nescafe Coconut
+                <span class="price">3,50 KM</span>
+
+                <button class="order-button" data-item="Nescafe Coconut">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Tea', this)">
+                Tea
+                <span class="price">2,00 KM</span>
+
+                <button class="order-button" data-item="Tea">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Black Tea', this)">
+                Black Tea
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Black Tea">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Green Tea', this)">
+                Green Tea
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Green Tea">Add</button>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+        <div class="menu-section">
+            <h2>Cold Drinks </h2>
+
+            <div class="menu-item" onclick="addToOrder('Coca Cola 0,25l', this)">
+                Coca Cola 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Coca Cola 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Fanta 0,25l', this)">
+                Fanta 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Fanta 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Sprite 0,25l', this)">
+                Sprite 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Sprite 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cocta 0,25l', this)">
+                Cocta 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Cocta 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Sensation 0,25l', this)">
+                Sensation 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Sensation 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Bitter Lemon 0,25l', this)">
+                Schweppes Bitter Lemon 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Schweppes Bitter Lemon 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Tangerine 0,25l', this)">
+                Schweppes Tangerine 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="'Schweppes Tangerine 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Schweppes Tonic 0,25l', this)">
+                Schweppes Tonic 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="'Schweppes Tonic 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Orangina 0,33l', this)">
+                Orangina 0,33l
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="Orangina 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Somersby %0 0,33l', this)">
+                Somersby %0 0,33l
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="'Somersby %0 0,33l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+        <div class="menu-section">
+            
+            <h2>Juices</h2>
+
+            <div class="menu-item" onclick="addToOrder('Cappy 0,25l', this)">
+                Cappy 0,25l
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="Cappy 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Kuća Prirode Juices 0,25l', this)">
+                Kuća Prirode Juices 0,25l
+                <span class="price">4,00 KM</span>
+
+                <button class="order-button" data-item="Kuća Prirode Juices 0,25l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Cedevita Instant Drink 0,25l', this)">
+                Cedevita Instant Drink 0,25l
+                <span class="price">3,00 KM</span>
+
+                <button class="order-button" data-item="Cedevita Instant Drink 0,25l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Energy Drinks</h2>
+
+            <div class="menu-item" onclick="addToOrder('Red Bull 0,25l', this)">
+                Red Bull 0,25l
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Red Bull 0,25l">Add</button>
+            </div>
+            
+            <div class="menu-item" onclick="addToOrder('Burn 0,25l', this)">
+                Burn 0,25l
+                <span class="price">4,00 KM</span>
+                <button class="order-button" data-item="Burn 0,25l">Add</button>
+            </div>
+           
+            <div class="menu-item" onclick="addToOrder('Richard 0,25l', this)">
+                Richard 0,25l
+                <span class="price">3,00 KM</span>
+                <button class="order-button" data-item="Richard 0,25l">Add</button>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="menu-section">
+
+            <h2>Water</h2>
+
+            <div class="menu-item" onclick="addToOrder('Non-Carbonated Water 0,33l', this)">
+                Non-Carbonated Water 0,33l
+                <span class="price">2,50 KM</span>
+                <button class="order-button" data-item="Non-Carbonated Water 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Carbonated Water 0,33l', this)">
+                Carbonated Water 0,33l
+                <span class="price">2,50 KM</span>
+                <button class="order-button" data-item="Carbonated Water 0,33l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Non-Carbonated Water 0,75l', this)">
+                Non-Carbonated Water 0,75l
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Non-Carbonated Water 0,75l">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Carbonated Water 0,75l', this)">
+                Carbonated Water 0,75l
+                <span class="price">6,00 KM</span>
+                <button class="order-button" data-item="Carbonated Water 0,75l">Add</button>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Desserts</h2>
+
+            <div class="menu-item" onclick="addToOrder('Cheesecake Raspberry', this)">
+                Cheesecake Raspberry 
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Cheesecake Raspberry">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Pistachio Cake', this)">
+                Pistachio Cake
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Pistachio Cake">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Chocolate Mousse Cake', this)">
+                Chocolate Mousse Cake 
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Chocolate Mousse Cake">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Baklava with Walnuts', this)">
+                Baklava with Walnuts
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Baklava with Walnuts">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Baklava with Pistachios', this)">
+                Baklava with Pistachios
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Baklava with Pistachios">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Tufahija', this)">
+                Tufahija
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Tufahija">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Choco Pear', this)">
+                Choco Pear
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Choco Pear">Add</button>
+            </div>
+
+            <div class="menu-item" onclick="addToOrder('Apple pie with Vanilla topping', this)">
+                Apple pie with Vanilla topping 
+                <span class="price">5,00 KM</span>
+                <button class="order-button" data-item="Apple pie with Vanilla topping">Add</button>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>Hookah</h2>
+
+            <div class="menu-item" onclick="addToOrder('Hookah', this)">
+                Hookah 
+                <span class="price">8,00 KM</span>
+                <button class="order-button" data-item="Hookah">Add</button>
+            </div>
+
+        
+        </div>
+    </div>
+    
+
+    </div>
+    <div class="ordered-items">
+        <h4>Ordered Items</h4>
+        <h5>click on item(s) for (-) take out item(s) or clear all with clear button<h5>
+    </div>
+    <button class="viber-button" onclick="sendOrder()">Send via Viber</button>
+
+    
+    <div class="bottom-container">
+
+        <div class="order-buttons"></div>
+    </div>
+    <div>
+
+        <br>
+
+    </div>
+
+    <button class="whatsapp-button" onclick="sendOrder()">Send via Whatsapp</button>
+
+
+
+
+
+    
+    
+</body>
+</html>
